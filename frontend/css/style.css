@@ -1,0 +1,15 @@
+.row {
+    padding-top: 40px;
+}
+
+#reg-form {
+    padding-top: 100px;
+    padding-left: 400px;
+    padding-right: 400px;
+}
+
+#login-form {
+    padding-top: 100px;
+    padding-left: 800px;
+    padding-right: 800px;
+}
