@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CoreUI CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Login-WeboGram</title>
+
+</head>
+
+<body>
+    <div id="header">
+        <header class="c-header c-header-dark  fixed-top bg-primary px-4">
+            <a class="c-header-brand" href="#">WeboGram</a>
+            <ul class="c-header-nav">
+                <li class="c-header-nav-item active">
+                    <a class="c-header-nav-link" href="HomePage.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="c-header-nav-item">
+                    <a class="c-header-nav-link" href="Register.html">Register</a>
+                </li>
+                <li class="c-header-nav-item">
+                    <a class="c-header-nav-link" href="Login.html">Login</a>
+                </li>
+            </ul>
+        </header>
+    </div>
+
+    <form id="login-form" action="http://localhost:3000 ">
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-4 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-4 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword3">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">
+                    <a href="http://localhost:3000"></a>
+                    Login</button>
+            </div>
+        </div>
+    </form>
+
+</body>
