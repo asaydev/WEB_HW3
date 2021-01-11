@@ -35,6 +35,7 @@ func main() {
 
 func handleRequests() {
 	router := mux.NewRouter().StrictSlash(true)
+	//router.HandleFunc("/", indexPageHandler)
 	router.HandleFunc("/api/signup", signup)
 	router.HandleFunc("/api/signin", signin)
 	router.HandleFunc("/api/logout", authorized(signout))
@@ -44,6 +45,10 @@ func handleRequests() {
 	router.HandleFunc("/api/post", checkuser(getposts))
 	http.ListenAndServe(":"+port, router)
 }
+
+func indexPageHandler(response http.ResponseWriter, request *http.Request) {
+	     fmt.Fprintf(response, IndexPage)
+	 }
 
 func getposts(w http.ResponseWriter, req *http.Request)  {
 	if req.Method == http.MethodGet{
@@ -76,6 +81,7 @@ func read(w http.ResponseWriter, req *http.Request) {
 func signup(w http.ResponseWriter, req *http.Request) {
 
 	if alreadyLoggedIn(w, req) {
+		fmt.Println("login before")
 		w.WriteHeader(http.StatusSeeOther)
 		return
 	}
@@ -116,6 +122,7 @@ func signup(w http.ResponseWriter, req *http.Request) {
 		cookie := &http.Cookie{
 			Name:  "session",
 			Value: sID.String(),
+			Path:   "/",
 		}
 		cookie.MaxAge = sessionLength
 		http.SetCookie(w, cookie)
@@ -134,6 +141,7 @@ func signup(w http.ResponseWriter, req *http.Request) {
 
 		users = append(users,user)
 		w.WriteHeader(http.StatusOK)
+		fmt.Println("Succesfuly login")
 		return
 	}else {
 		w.WriteHeader(http.StatusBadRequest)
@@ -145,15 +153,18 @@ func signup(w http.ResponseWriter, req *http.Request) {
 func signin(w http.ResponseWriter, req *http.Request) {
 
 	if alreadyLoggedIn(w, req) {
+		fmt.Println("before login")
 		w.WriteHeader(http.StatusSeeOther)
 		return
 	}
-
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	fmt.Fprintf(w, IndexPage)
 	// process form submission
 	if req.Method == http.MethodPost {
 		email := req.FormValue("email")
 		password := req.FormValue("password")
-
+		fmt.Println(email)
+		fmt.Println(password)
 		if email == "" ||  password== "" {
 			http.Error(w, "Request Length should be 2", http.StatusBadRequest)
 			return
@@ -191,12 +202,13 @@ func signin(w http.ResponseWriter, req *http.Request) {
 		cookie := &http.Cookie{
 			Name:  "session",
 			Value: sID.String(),
+			Path:   "/",
 		}
 		cookie.MaxAge = sessionLength
 		http.SetCookie(w, cookie)
 		dbSessions[cookie.Value] = Session{email, time.Now()}
 		w.WriteHeader(http.StatusOK)
-
+		fmt.Println("Succesfuly login")
 		return
 	}else {
 		w.WriteHeader(http.StatusBadRequest)
@@ -471,3 +483,22 @@ type Post struct {
 type PostID struct {
 	Id int64 `json:"id"`
 }
+
+
+
+
+const  IndexPage = `
+
+
+<h1>Login</h1>
+  <form method="post" action="/api/signin">
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password">
+     <button type="submit">Login</button>
+  </form>
+
+
+
+`
