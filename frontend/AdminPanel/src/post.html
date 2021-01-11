@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
     <title>CreatePost-WeboGram</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 
 </head>
 
@@ -30,7 +32,7 @@
             </ul>
         </header>
     </div>
-    <form style="padding-right: 500px; padding-left: 500px; padding-top: 100px;">
+    <form style="padding-right: 500px; padding-left: 500px; padding-top: 100px;" id="createPostForm">
         <div class="form-row">
             <div class="mb-3 col-md-6">
                 <label for="titleInput">Title</label>
@@ -45,7 +47,7 @@
         </div>
         <div class="form-row">
             <div class="mb-2">
-                <button type="submit" class="btn btn-primary">Post</button>
+                <button type="submit" class="btn btn-primary" onclick="createPost()">Post</button>
             </div>
         </div>
 
@@ -53,5 +55,5 @@
 
     </form>
 
-
+    <script src="./js/script.js"></script>
 </body>
